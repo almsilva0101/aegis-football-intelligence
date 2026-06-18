@@ -147,3 +147,171 @@ def main_dashboard():
         st.markdown("""
         <div class='manual-box'>
             <div class='manual-title'>📘 DIRETRIZ OPERACIONAL - O QUE É, COMO FUNCIONA E PARA QUE SERVE</div>
+            <div class='manual-text'>
+                <b>O que é:</b> Um indicador proprietário que calcula a velocidade de processamento cerebral do jogador sob pressão física e tática.<br>
+                <b>Como funciona:</b> Cruza o tempo de reação do passe (capturado por visão computacional) com os picos de frequência cardíaca.<br>
+                <b>Para que serve:</b> Substituir atletas antes que o cansaço mental gere erros cruciais de posicionamento ou perda de posse de bola.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        m1, m2, m3, m4 = st.columns(4)
+        m1.metric("Eficiência de Tomada de Decisão", "84.5%", "-3.2% nos últimos 10min")
+        m2.metric("Tempo Médio de Reação", "0.42s", "+0.11s de atraso", delta_color="inverse")
+        m3.metric("Distância Percorrida Total", "9.42 km", "Alta Intensidade")
+        m4.metric("Índice de Estresse Mental (IA)", "6.8 / 10", "Alerta Amarelo")
+
+        minutos = np.linspace(1, 90, 90)
+        eficiencia = 100 - (minutos * 0.2) - (np.random.randn(90) * 1.5)
+        eficiencia[65:] -= 12 
+        
+        fig_cog = px.line(x=minutos, y=eficiencia, labels={'x': 'Minuto da Partida', 'y': 'Lucidez de Tomada de Decisão (%)'}, color_discrete_sequence=['#00FF66'])
+        fig_cog.update_layout(paper_bgcolor='#0E1117', plot_bgcolor='#0E1117', font_color='white', height=250)
+        st.plotly_chart(fig_cog, use_container_width=True)
+
+    # =====================================================================
+    # ABA 2: GÊMEO BIOMECÂNICO
+    # =====================================================================
+    with tab_biomecanica:
+        st.markdown("### 🦵 Análise de Assimetria Cinemática e Risco de Lesão")
+        st.markdown("""
+        <div class='manual-box'>
+            <div class='manual-title'>📘 DIRETRIZ OPERACIONAL - O QUE É, COMO FUNCIONA E PARA QUE SERVE</div>
+            <div class='manual-text'>
+                <b>O que é:</b> Um espelho biomecânico que monitora o balanço de forças nas articulações inferiores durante o jogo.<br>
+                <b>Como funciona:</b> Sensores de aceleração nos coletes captam a força de frenagem e arranque, medindo descompensações de carga.<br>
+                <b>Para que serve:</b> Prevek estiramentos e lesões de ligamento (LCA) antes que ocorram, sugerindo janelas protetivas de substituição.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col_bio_esq, col_bio_dir = st.columns([1, 1])
+        with col_bio_esq:
+            st.markdown("#### Distribuição de Sobrecarga Articular Dinâmica")
+            categorias = ['Aceleração', 'Frenagem Aguda', 'Mudança de Direção', 'Impacto de Passada', 'Estabilidade Pélvica']
+            fig_radar = go.Figure()
+            fig_radar.add_trace(go.Scatterpolar(r=[85, 90, 75, 80, 88], theta=categorias, fill='toself', name='Perna Direita', line=dict(color='#00FF66')))
+            fig_radar.add_trace(go.Scatterpolar(r=[70, 72, 60, 82, 85], theta=categorias, fill='toself', name='Perna Esquerda (Compensando)', line=dict(color='#FF2E93')))
+            fig_radar.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 100])), paper_bgcolor='#0E1117', font_color='white', height=300, margin=dict(t=30, b=30))
+            st.plotly_chart(fig_radar, use_container_width=True)
+            
+        with col_bio_dir:
+            st.markdown("#### Painel Clínico Preditivo do Gêmeo Digital")
+            st.markdown("<div class='card-painel'>", unsafe_allow_html=True)
+            st.error("🚨 ALERTA MÉDICO: Assimetria Crítica detectada no Isquiotibial Esquerdo (Diferença de 15% na frenagem excêntrica).")
+            st.warning("⚠️ Recomendação da IA: Limite operacional de sprint atingido. Substituição preventiva urgente.")
+            st.write(f"**Atleta Selecionado:** {atleta_ativo}")
+            st.markdown("</div>", unsafe_allow_html=True)
+
+    # =====================================================================
+    # ABA 3: ESPACIAL & GOVERNANÇA DE APIs
+    # =====================================================================
+    with tab_espacial:
+        st.markdown("### 📐 Mapa de Ocupação Espacial Dinâmica e Matriz de Ingestão de Dados")
+        st.markdown("""
+        <div class='manual-box'>
+            <div class='manual-title'>📘 DIRETRIZ OPERACIONAL - O QUE É, COMO FUNCIONA E PARA QUE SERVE</div>
+            <div class='manual-text'>
+                <b>O que é:</b> Um orrery tático bidimensional do campo que calcula a compactação de blocos e linhas de passes seguras.<br>
+                <b>Como funciona:</b> Processa os vetores de posicionamento dos atletas em relação à bola para identificar vulnerabilidades estruturais.<br>
+                <b>Para que serve:</b> Ajustar as estratégias de pressão defensiva e amplitude de ataque durante os treinos ou no intervalo da partida.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col_esp_mapa, col_esp_api = st.columns([1, 1.2])
+        with col_esp_mapa:
+            st.markdown("#### Simulação Espacial de Compactação de Bloco")
+            x_jogadores = [10, 15, 12, 25, 30, 22, 5, -5, -12, 0]
+            y_jogadores = [5, -8, 12, 15, 0, -14, -2, 10, -5, 2]
+            cores = ['#00FF66']*6 + ['#FF2E93']*4
+            
+            fig_campo = px.scatter(x=x_jogadores, y=y_jogadores, color=cores, color_discrete_map={'#00FF66':'Mandante', '#FF2E93':'Visitante'}, text=[f"P{i}" for i in range(10)])
+            fig_campo.update_traces(marker=dict(size=18, line=dict(width=2, color='white')), textposition="top center")
+            fig_campo.update_layout(
+                paper_bgcolor='#0E1117', plot_bgcolor='#020617', font_color='white', height=300, margin=dict(t=10),
+                xaxis=dict(showgrid=True, gridcolor='#1E293B', range=[-30, 40]), yaxis=dict(showgrid=True, gridcolor='#1E293B', range=[-25, 25])
+            )
+            st.plotly_chart(fig_campo, use_container_width=True)
+
+        with col_esp_api:
+            st.markdown("#### 🔌 Matriz de Integração de APIs de Ingestão de Dados (Data Governance)")
+            api_football_data = {
+                "Vetor de Informação": ["Coordenadas X, Y dos Atletas", "Frequência Cardíaca/Métrica Interna", "Histórico Clínico e Contratos", "Eventos de Jogo (Passes/Faltas)", "Mapeamento Biomecânico de Transmissão"],
+                "Provedor Oficial": ["ChyronHego / TRACAB API", "Catapult Sports Cloud", "Transfermarkt / FBref Ledger", "StatsPerform / Opta API", "Second Spectrum Vision API"],
+                "Endpoint Tecnológico Integrado": ["api.chyronhego.com/v2/tracking", "api.catapultsports.com/v4/metrics", "internal.aegis.football/scouting", "api.statsperform.com/v1/football", "api.secondspectrum.com/v1/vision"],
+                "Protocolo / Taxa Ingestão": ["Stream Binário // 25fps", "REST JSON // 10Hz", "Batch Diário // JSON", "REST Webhook // Event-Driven", "Websocket Live // 30fps"]
+            }
+            st.dataframe(pd.DataFrame(api_football_data), use_container_width=True, hide_index=True)
+
+    # =====================================================================
+    # ABA 4: ALGORITMO MONEYBALL E SCOUTING IA
+    # =====================================================================
+    with tab_moneyball:
+        st.markdown("### 💸 Algoritmo Moneyball Inteligente: Identificação de Atletas Subestimados e de Baixo Custo")
+        st.markdown("""
+        <div class='manual-box'>
+            <div class='manual-title'>📘 DIRETRIZ OPERACIONAL - O QUE É, COMO FUNCIONA E PARA QUE SERVE</div>
+            <div class='manual-text'>
+                <b>O que é:</b> Um motor analítico preditivo de Machine Learning voltado para recrutamento de alta eficiência de custo.<br>
+                <b>Como funciona:</b> O algoritmo varre bases de dados internacionais de ligas secundárias e calcula o <b>Score de Eficiência Estatística</b> (combinando passes progressivos, desarmes, xG e assistências) em relação ao <b>Valor de Mercado</b> do jogador.<br>
+                <b>Para que serve:</b> Encontrar talentos de elite ocultos no mercado global por preços extremamente baixos, garantindo retorno esportivo e financeiro massivo para os clubes e federações.<br>
+                <b>API de Integração Pública:</b> Consome metadados estruturados de mercado via <b>Wyscout Open API</b> (<code>api.wyscout.com/v3/players</code>) e históricos do <b>Transfermarkt API Gateway</b>.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        scouting_data = {
+            "Nome do Atleta": ["Mateo Kovacevic", "Lukas Nielsen", "Gabriel Barbosa Jr.", "Amara Diallo", "Hiroshi Tanaka", "Santiago Rossi", "Alan Kardec Sol", "Viktor Ivanov"],
+            "Posição": ["Volante Construtor", "Zagueiro Central", "Lateral Esquerdo", "Ponta Velocista", "Meia Central", "Centroavante", "Meia Atacante", "Volante de Contenção"],
+            "Idade": [22, 23, 21, 20, 24, 22, 19, 23],
+            "Liga Atual": ["2ª Divisão Croácia", "Liga Dinamarquesa", "Série B Brasileira", "Campeonato Senegalês", "J2 League (Japão)", "Liga Uruguaia", "Campeonato Paranaense", "Liga Búlgara"],
+            "Score de IA (Performance)": [89.2, 85.0, 87.4, 91.1, 83.5, 86.0, 92.4, 82.1],
+            "Valor de Mercado": ["€ 450K", "€ 800K", "€ 600K", "€ 200K", "€ 500K", "€ 750K", "€ 150K", "€ 300K"],
+            "Status de Recomendação IA": ["🔥 Alvo Crítico (Pechincha)", "✅ Altamente Recomendado", "🔥 Alvo Crítico (Pechincha)", "💎 Joia Oculta Subestimada", "✅ Recomendado", "✅ Recomendado", "💎 Joia Oculta Subestimada", "⚠️ Avaliar Monitoramento"]
+        }
+        df_scouting = pd.DataFrame(scouting_data)
+        
+        col_filtro1, col_filtro2 = st.columns([1, 2])
+        with col_filtro1:
+            st.markdown("#### Filtros Estratégicos")
+            filtro_posicao = st.multiselect("Filtrar por Posição:", options=list(df_scouting["Posição"].unique()), default=list(df_scouting["Posição"].unique()))
+            df_filtrado = df_scouting[df_scouting["Posição"].isin(filtro_posicao)]
+            
+            st.markdown("<div class='card-painel'>", unsafe_allow_html=True)
+            st.write("**Resumo do Algoritmo:**")
+            st.write("📈 Total de Alvos Mapeados: **1.420**")
+            st.write("🎯 Margem de Erro do Modelo: **± 2.4%**")
+            st.write("💎 Maior ROI Identificado hoje: **Alan Kardec Sol**")
+            st.markdown("</div>", unsafe_allow_html=True)
+            
+        with col_filtro2:
+            st.markdown("#### Matriz de Custo x Performance (Anomalias de Mercado)")
+            np.random.seed(42)
+            n_mercado = 40
+            perf_sim = np.random.uniform(50, 95, n_mercado)
+            custo_sim = (perf_sim * np.random.uniform(0.1, 0.4, n_mercado)) + np.random.uniform(0.5, 12, n_mercado)
+            
+            perf_sim = np.append(perf_sim, [92.4, 91.1, 89.2])
+            custo_sim = np.append(custo_sim, [0.15, 0.20, 0.45])
+            nomes_sim = ["Outros Atletas"]*n_mercado + ["Alan Kardec Sol", "Amara Diallo", "Mateo Kovacevic"]
+            
+            df_chart = pd.DataFrame({"Performance (Score IA)": perf_sim, "Custo Estimado (€ Milhões)": custo_sim, "Atleta": nomes_sim})
+            
+            fig_money = px.scatter(df_chart, x="Custo Estimado (€ Milhões)", y="Performance (Score IA)", color="Atleta",
+                                   color_discrete_map={"Outros Atletas": "#334155", "Alan Kardec Sol": "#00FF66", "Amara Diallo": "#00E5FF", "Mateo Kovacevic": "#FFD600"})
+            fig_money.update_traces(marker=dict(size=14, opacity=0.85))
+            fig_money.update_layout(paper_bgcolor='#0E1117', plot_bgcolor='#0E1117', font_color='white', height=300, margin=dict(t=10, b=10))
+            st.plotly_chart(fig_money, use_container_width=True)
+
+        st.markdown("#### 🎯 Alvos Identificados pelo Sistema de Recomendações")
+        st.dataframe(df_filtrado, use_container_width=True, hide_index=True)
+
+    st.markdown("---")
+    st.markdown("<p style='text-align: center; color: #334155; font-size: 11px;'>SISTEMA DE INTELIGÊNCIA TÁTICA, DEFESA BIOMECÂNICA E RETORNO FINANCEIRO AEGIS FOOTBALL © 2026 // ACESSO RESTRITO</p>", unsafe_allow_html=True)
+
+# Inicializador Root Controlado
+if not st.session_state['auth_football']:
+    login_cadastro_page()
+else:
+    main_dashboard()
